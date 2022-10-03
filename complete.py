@@ -1,3 +1,4 @@
+import getpass
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
@@ -46,8 +47,8 @@ simulateHTML5DragAndDrop(source, destination);
 '''
 
 # Enter your zybooks login below with the course code
-email = ""     # "ExampleEmail@gmail.com"
-course = ""    # "ExampleCourseCode"
+email = "3002711sellers@gmail.com"     # "ExampleEmail@gmail.com"
+course = "UWFCOP2253GrynFall2022"    # "ExampleCourseCode"
 
 def login(driver, email, course):
     driver.get("https://learn.zybooks.com/signin")
@@ -58,7 +59,7 @@ def login(driver, email, course):
         
         if not email:
             email = input("Please enter your zyBooks email: ")
-        email_input.send_keys(myEmail)
+            email_input.send_keys(myEmail)
         if (email == "quit"):
             print("--Exiting--")
             driver.quit()
@@ -401,7 +402,7 @@ def completeProgressionChallenges(driver):  # Currently not used
 
 
 if (os.name == 'nt'):
-    geckodriver_path = '.\\geckodriver.exe'
+    geckodriver_path = 'C:\\usr\\local\\bin\\geckodriver.exe'
 else:
     geckodriver_path = './geckodriver'
 options = Options()
@@ -415,14 +416,14 @@ print("\nHeadless Firefox browswer initiated.\n")
 try:
     login(driver, email, course)
     try:
-        WebDriverWait(driver, 10).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".library-page")))
+        WebDriverWait(driver, 100).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".library-page")))
     except:
         print("Timed out while loading zyBooks library, aborting...")
         driver.quit()
         os._exit(0)
     selectzyBook(driver)
     try:
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 100).until(
             expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".table-of-contents.ember-view")))
     except:
         print("Timed out while loading zyBook table of contents, aborting...")
